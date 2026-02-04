@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Services;
+
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use Exception;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
+class LegislationCategoryUpdateService
+{
+    public function __construct(
+        protected LegislationCategoryService $legislationCategoryService,
+    ) {
+        //
+    }
+    
+    public function update(array $request, $category_id)
+    {
+        try {
+            DB::beginTransaction();
+            
+            $this->legislationCategoryService->update($request, $category_id);
+
+            DB::commit();
+        } catch (Exception $exception) {
+            //Bugsnag::notifyException($exception);
+            DB::rollBack();
+            throw new Exception($exception);
+        }
+    }
+}

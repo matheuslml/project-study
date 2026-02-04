@@ -1,0 +1,30 @@
+name: Action Deployer to Develop
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy-develop:
+    name: Deploy code to develop
+#     runs-on: ubuntu-latest
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2.10'
+      #- name: Composer recipes
+      #  run: composer global require "deployer/deployer":"v6.8.0" deployer/recipes -W
+      - uses: atymic/deployer-php-action@master
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+          ssh-disable-host-key-checking: true
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      - name: Deploy to develop
+        run: dep deploy develop --branch=develop
