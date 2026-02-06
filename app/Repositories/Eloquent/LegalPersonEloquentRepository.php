@@ -2,39 +2,39 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\IndividualPeople;
+use App\Models\LegalPerson;
 use App\Repositories\EloquentRepository;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\Pure;
+use Spatie\QueryBuilder\QueryBuilder;
 
-class IndividualPeopleEloquentRepository extends EloquentRepository
+class LegalPersonEloquentRepository extends EloquentRepository
 {
     #[Pure]
     public function __construct()
     {
-        parent::__construct(new IndividualPeople());
+        parent::__construct(new LegalPerson());
     }
 
-    public function update($id, array $data): IndividualPeople | Model
-    {
-        return parent::update($id, $data);
-    }
-
-    public function create($data): IndividualPeople | Model
+    public function create($data): LegalPerson | Model
     {
         return parent::create($data);
     }
 
-    public function get(): Collection
+    public function update($id, $data): LegalPerson | Model
+    {
+        return parent::update($id, $data);
+    }
+
+    public function get(): Collection | array
     {
         return parent::get();
     }
 
-    public function find($id): IndividualPeople | Model
+    public function find($id): LegalPerson | Model
     {
         return parent::find($id);
     }
@@ -44,17 +44,17 @@ class IndividualPeopleEloquentRepository extends EloquentRepository
         return parent::withTrashed();
     }
 
-    public function delete($id): IndividualPeople | Model
+    public function delete($id): LegalPerson | Model
     {
         return parent::delete($id);
     }
 
-    public function restore($id): IndividualPeople | Model
+    public function restore($id): LegalPerson | Model
     {
         return parent::restore($id);
     }
 
-    public function forceDelete($id): IndividualPeople | Model
+    public function forceDelete($id): LegalPerson | Model
     {
         return parent::forceDelete($id);
     }

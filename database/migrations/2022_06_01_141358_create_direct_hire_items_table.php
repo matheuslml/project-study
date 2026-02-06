@@ -16,7 +16,7 @@ class CreateDirectHireItemsTable extends Migration
         Schema::create('direct_hire_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('direct_hire_id')->constrained('direct_hires');
-            $table->foreignId('people_id')->nullable()->constrained('people');
+            $table->foreignId('person_id')->nullable()->constrained('people');
             $table->integer('quantity')->nullable();
             $table->string('name');
             $table->decimal('value', $precision = 8, $scale = 2)->nullable();

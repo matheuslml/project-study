@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\DocumentType;
-use App\Models\People;
+use App\Models\Person;
 use App\Models\Document;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;

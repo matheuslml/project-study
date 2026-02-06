@@ -45,7 +45,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $statuses = NotificationStatus::orderBy('status', 'asc')->get();
             $types = NotificationType::orderBy('title', 'asc')->get();
-            $users = User::with('person')->latest()->get(['id', 'email', 'people_id']);
+            $users = User::with('person')->latest()->get(['id', 'email', 'person_id']);
             return view('admin.notification.index', compact('unit', 'copyright', 'notifications', 'readeds', 'not_readeds', 'sendeds', 'users', 'statuses', 'types'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as notificações Cadastradas!')->error();

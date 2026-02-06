@@ -119,7 +119,7 @@
     <div class="team-boxed">
         <div class="container">
             <div class="carousel-wrapper">
-            <div class="row people">
+            <div class="row person">
                 @foreach ($web_shortcuts as $web_shortcut)
                 <div class="col-12 col-md-2 col-lg-2 col-xl-2 item">
                     <a href="{{ $web_shortcut->link_url }}">
@@ -315,7 +315,7 @@
   <!-- SHORTCUT NAV-BUTTON -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const carousel = document.querySelector('.team-boxed .row.people');
+      const carousel = document.querySelector('.team-boxed .row.person');
       const prevButton = document.querySelector('.carousel-nav.prev');
       const nextButton = document.querySelector('.carousel-nav.next');
 

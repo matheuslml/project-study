@@ -40,22 +40,22 @@
                     <div class="row">
                       <div class="col-4 col-md-4">
                         <label class="form-label" for="name">Tipo</label>
-                        <input class="form-control" type="text" value="{{$person->peopleable_type==='App\Models\LegalPeople'
+                        <input class="form-control" type="text" value="{{$person->personable_type==='App\Models\LegalPerson'
                                                                           ? 'Pessoa Jurídica'
                                                                           : 'Pessoa Física' }}"
                                                                           disabled />
                       </div>
-                      <div class="col-8 col-md-8" {{$person->peopleable_type==='App\Models\LegalPeople' ? 'hidden' : ''}}>
+                      <div class="col-8 col-md-8" {{$person->personable_type==='App\Models\LegalPerson' ? 'hidden' : ''}}>
                         <label class="form-label" for="name">Nome Completo</label>
                         <input class="form-control" type="text" value="{{ $person->full_name }}" disabled />
                       </div>
-                      <div class="col-8 col-md-8" {{$person->peopleable_type==='App\Models\LegalPeople' ? '' : 'hidden'}}>
+                      <div class="col-8 col-md-8" {{$person->personable_type==='App\Models\LegalPerson' ? '' : 'hidden'}}>
                         <label class="form-label" for="name">Nome da Empresa</label>
-                        <input class="form-control" type="text" value="{{ $person->peopleable->company_name }}" disabled />
+                        <input class="form-control" type="text" value="{{ $person->personable->company_name }}" disabled />
                       </div>
-                      <div class="col-12 col-md-12" {{$person->peopleable_type==='App\Models\LegalPeople' ? '' : 'hidden'}}>
+                      <div class="col-12 col-md-12" {{$person->personable_type==='App\Models\LegalPerson' ? '' : 'hidden'}}>
                         <label class="form-label" for="name">Nome do Representante Legal</label>
-                        <input class="form-control" type="text" value="{{ $person->peopleable->legal_responsible }}" disabled />
+                        <input class="form-control" type="text" value="{{ $person->personable->legal_responsible }}" disabled />
                       </div>
                       @foreach($person->documents as $document)
                         <div class="col-6 col-md-6">

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExtensionController;
 
-use App\Http\Controllers\PeopleController;
+use App\Http\Controllers\PersonController;
 use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\UsersController;
@@ -116,7 +116,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     //Main - Pessoas
-    Route::resource('/pessoas', PeopleController::class);
+    Route::resource('/pessoas', PersonController::class);
     Route::resource('/telefones', PhoneController::class);
     Route::resource('/documentos', DocumentController::class);
     Route::resource('/emails', EmailController::class);
@@ -208,8 +208,8 @@ Route::group(['middleware' => ['auth']], function () {
     //Route::post('ajaxRegister', ['as' => 'ajax.storecontent', 'uses' => 'App\Http\Controllers\NewsController@store_content']);
     Route::post('/savenewscontent', [NewsController::class, 'store_content'])->name('store_content');
 
-    //people
-    Route::get('store_people', [PeopleController::class, 'store_people'])->name('store_people');
+    //person
+    Route::get('store_person', [PersonController::class, 'store_person'])->name('store_person');
 
     //Legislation Vínculo
     Route::post('legislacao_vinculo/{base}', [LegislationController::class, 'legislacao_vinculo'])->name('legislacao_vinculo');

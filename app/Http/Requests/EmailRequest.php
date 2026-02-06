@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\People;
+use App\Models\Person;
 use App\Models\Email;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -35,9 +35,9 @@ class EmailRequest extends FormRequest
                 'min:3',
                 'max:150'
             ],
-            'people_id'    => [
+            'person_id'    => [
                 'required',
-                Rule::exists(People::class, 'id')
+                Rule::exists(Person::class, 'id')
             ],
         ];
     }
@@ -48,7 +48,7 @@ class EmailRequest extends FormRequest
             'email.required' => 'É obrigatório colocar um e-mail.',
             'email.min' => 'O nome tem que ter de 3 a 150 caracteres.',
             'email.max' => 'O nome tem que ter de 3 a 150 caracteres.',
-            'people_id.required' => 'É obrigatório colocar um dono do e-mail.',
+            'person_id.required' => 'É obrigatório colocar um dono do e-mail.',
         ];
     }
     
@@ -56,7 +56,7 @@ class EmailRequest extends FormRequest
     {
         return [
             'email'                    => 'E-mail',
-            'people_id'                => 'pessoa',
+            'person_id'                => 'pessoa',
             'type_'                    => 'tipo de E-mail',
         ];
     }

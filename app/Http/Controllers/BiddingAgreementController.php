@@ -14,7 +14,7 @@ use App\Models\BiddingAgreementFile;
 use App\Models\BlankPage;
 use App\Models\DocumentType;
 use App\Models\News;
-use App\Models\People;
+use App\Models\Person;
 use App\Models\Project;
 use App\Models\TypeRequest;
 use App\Models\Unit;

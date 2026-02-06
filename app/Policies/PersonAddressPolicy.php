@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\PeopleAddress;
+use App\Models\PersonAddress;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PeopleAddressPolicy
+class PersonAddressPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class PeopleAddressPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PeopleAddress  $peopleAddress
+     * @param  \App\Models\PersonAddress  $personAddress
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, PeopleAddress $peopleAddress)
+    public function view(User $user, PersonAddress $personAddress)
     {
         //
     }
@@ -48,10 +48,10 @@ class PeopleAddressPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PeopleAddress  $peopleAddress
+     * @param  \App\Models\PersonAddress  $personAddress
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, PeopleAddress $peopleAddress)
+    public function update(User $user, PersonAddress $personAddress)
     {
         //
     }
@@ -60,10 +60,10 @@ class PeopleAddressPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PeopleAddress  $peopleAddress
+     * @param  \App\Models\PersonAddress  $personAddress
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, PeopleAddress $peopleAddress)
+    public function delete(User $user, PersonAddress $personAddress)
     {
         //
     }
@@ -72,10 +72,10 @@ class PeopleAddressPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PeopleAddress  $peopleAddress
+     * @param  \App\Models\PersonAddress  $personAddress
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, PeopleAddress $peopleAddress)
+    public function restore(User $user, PersonAddress $personAddress)
     {
         //
     }
@@ -84,10 +84,10 @@ class PeopleAddressPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\PeopleAddress  $peopleAddress
+     * @param  \App\Models\PersonAddress  $personAddress
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, PeopleAddress $peopleAddress)
+    public function forceDelete(User $user, PersonAddress $personAddress)
     {
         //
     }

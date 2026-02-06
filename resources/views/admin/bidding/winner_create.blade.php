@@ -43,11 +43,11 @@
                   </div>
                   <div class="row">
                     <div class="mb-1 col-md-4">
-                      <label class="form-label" for="peopleable_type">Tipo de Pessoa</label>
-                      <select class="form-select input-admin" id="peopleable_type" name="peopleable_type" onchange="type_people();">
+                      <label class="form-label" for="personable_type">Tipo de Pessoa</label>
+                      <select class="form-select input-admin" id="personable_type" name="personable_type" onchange="type_person();">
                         <option value="" class="">Tipos</option>
-                        <option value="pj" {{ old('peopleable_type')==='pj' ? 'selected' : '' }} >Pessoa Jurídica</option>
-                        <option value="pf" {{ old('peopleable_type')==='pf' ? 'selected' : '' }} >Pessoa Física</option>
+                        <option value="pj" {{ old('personable_type')==='pj' ? 'selected' : '' }} >Pessoa Jurídica</option>
+                        <option value="pf" {{ old('personable_type')==='pf' ? 'selected' : '' }} >Pessoa Física</option>
                       </select>
                     </div>
                     <div class="mb-1 col-md-8 pf " style="display: none;">
@@ -249,7 +249,7 @@
 @section('page-script')
 <script src="{{ asset(mix('js/scripts/departament/departament.js')) }}"></script>
 <script src="{{ asset(mix('js/scripts/address/address.js')) }}"></script>
-<script src="{{ asset(mix('js/scripts/people/types_show.js')) }}"></script>
+<script src="{{ asset(mix('js/scripts/person/types_show.js')) }}"></script>
 <script src="{{asset(mix('js/scripts/pages/auth-register.js'))}}"></script>
 <script src="{{ asset(mix('js/scripts/forms/form-input-mask.js')) }}"></script>
 @endsection

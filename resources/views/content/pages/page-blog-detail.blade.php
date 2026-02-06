@@ -46,7 +46,7 @@
           </div>
           <p class="card-text mb-2">
             Before you get into the nitty-gritty of coming up with a perfect title, start with a rough draft: your
-            working title. What is that, exactly? A lot of people confuse working titles with topics. Let's clear that
+            working title. What is that, exactly? A lot of person confuse working titles with topics. Let's clear that
             Topics are very general and could yield several different blog posts. Think "raising healthy kids," or
             "kitchen storage." A writer might look at either of those topics and choose to take them in very, very
             different directions.A working title, on the other hand, is very specific and guides the creation of a

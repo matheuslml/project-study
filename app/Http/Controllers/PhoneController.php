@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\phoneRequest;
 use App\Models\Phone;
-use App\Services\PeopleService;
+use App\Services\PersonService;
 use App\Services\PhoneService;
 use App\Services\PhoneCreateService;
 use App\Services\PhoneUpdateService;
@@ -16,21 +16,21 @@ use Illuminate\Support\Facades\Gate;
 class PhoneController extends Controller
 {
     public function __construct(
-        protected PeopleService $peopleService,
+        protected PersonService $personService,
         protected PhoneService $phoneService,
         protected PhoneCreateService $phoneCreateService,
         protected PhoneUpdateService $phoneUpdateService,
     ){}
 
-    public function index_people_phone($person_id): View
+    public function index_person_phone($person_id): View
     {
         if (! Gate::allows('Ver e Listar Telefones')) {
             return view('pages.not-authorized');
         }
 
         try{
-            $person = $this->peopleService->show($person_id);
-            return view('admin.phone.people_phone', compact('person'));
+            $person = $this->personService->show($person_id);
+            return view('admin.phone.person_phone', compact('person'));
         } catch (\Throwable $throwable) {
             flash('Erro ao buscar registro!')->error();
             flash('Erro ao procurar as Telefones Cadastrados!')->error();

@@ -13,7 +13,7 @@ use App\Models\DirectHireWinner;
 use App\Models\Gallery;
 use App\Models\Leadership;
 use App\Models\News;
-use App\Models\People;
+use App\Models\Person;
 use App\Models\Project;
 use App\Models\TypeRequest;
 use App\Models\Unit;
@@ -113,7 +113,7 @@ class DirectHireController extends Controller
             $direct_hires = DirectHire::with('modality')
             ->latest()
             ->get();
-            $possible_winners = People::whereDoesntHave('departaments')
+            $possible_winners = Person::whereDoesntHave('departaments')
                                         ->orderBy('full_name', 'asc')
                                         ->get();
             $modalities = DirectHireModality::with('directHires')->orderBy('title', 'asc')->get();

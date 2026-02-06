@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\EmailRequest;
 use App\Models\Email;
-use App\Services\PeopleService;
+use App\Services\PersonService;
 use App\Services\EmailService;
 use App\Services\EmailCreateService;
 use App\Services\EmailUpdateService;
@@ -16,21 +16,21 @@ use Illuminate\Support\Facades\Gate;
 class EmailController extends Controller
 {
     public function __construct(
-        protected PeopleService $peopleService,
+        protected PersonService $personService,
         protected EmailService $emailService,
         protected EmailCreateService $emailCreateService,
         protected EmailUpdateService $emailUpdateService,
     ){}
 
-    public function index_people_email($person_id): View
+    public function index_person_email($person_id): View
     {
         if (! Gate::allows('Ver e Listar E-mails')) {
             return view('pages.not-authorized');
         }
 
         try{
-            $person = $this->peopleService->show($person_id);
-            return view('admin.email.people_email', compact('person'));
+            $person = $this->personService->show($person_id);
+            return view('admin.email.person_email', compact('person'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar os e-mails Cadastrados!')->error();
             return redirect()->back()->withInput();

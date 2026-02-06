@@ -4,7 +4,7 @@ namespace App\Models\ModelFilters;
 
 use EloquentFilter\ModelFilter;
 
-class PeopleFilter extends ModelFilter
+class PersonFilter extends ModelFilter
 {
     /**
     * Related Models that have ModelFilters as well as the method on the ModelFilter
@@ -19,9 +19,9 @@ class PeopleFilter extends ModelFilter
         return $this->where('name', 'LIKE', '%' . $name . '%');
     }
 
-    public function type($peopleable_type)
+    public function type($personable_type)
     {
-        return $this->where('peopleable_type', '=', $peopleable_type);
+        return $this->where('personable_type', '=', $personable_type);
     }
 
     public function created($created_at)

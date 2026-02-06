@@ -27,7 +27,7 @@ class Address extends Model implements Auditable
         'postal_code',
         'neighborhood',
         'city_id',
-        'people_id',
+        'person_id',
     ];
 
     public function city(): BelongsTo
@@ -55,8 +55,8 @@ class Address extends Model implements Auditable
         $this->attributes['neighborhood'] = mb_strtoupper($value);
     }
 
-    public function people(): BelongsToMany
+    public function person(): BelongsToMany
     {
-        return $this->belongsToMany(People::class, 'people_id');
+        return $this->belongsToMany(Person::class, 'person_id');
     }
 }

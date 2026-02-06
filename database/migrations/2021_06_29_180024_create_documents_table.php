@@ -17,7 +17,7 @@ class CreateDocumentsTable extends Migration
             $table->id();
             $table->string('document')->index();
             $table->date('expires_at')->nullable()->default(null);
-            $table->foreignId('people_id')->constrained('people');
+            $table->foreignId('person_id')->constrained('people');
             $table->foreignId('document_type_id')->constrained('document_types');
             $table->softDeletes();
             $table->timestamps();

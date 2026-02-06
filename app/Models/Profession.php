@@ -25,8 +25,8 @@ class Profession extends Model implements Auditable
         'deleted_at'
     ];
 
-    public function people(): BelongsTo
+    public function person(): BelongsTo
     {
-        return $this->belongsTo(People::class);
+        return $this->belongsTo(Person::class);
     }
 }

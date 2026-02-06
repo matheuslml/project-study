@@ -16,7 +16,7 @@ class CreateEmployeesTable extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('registry')->nullable();
-            $table->foreignId('people_id')->constrained('people');
+            $table->foreignId('person_id')->constrained('people');
             $table->softDeletes();
             $table->timestamps();
         });

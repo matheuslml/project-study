@@ -21600,11 +21600,11 @@ readers do not read off random characters that represent icons */
   content: "";
 }
 
-.fa-people-arrows:before {
+.fa-person-arrows:before {
   content: "";
 }
 
-.fa-people-carry:before {
+.fa-person-carry:before {
   content: "";
 }
 
@@ -65671,7 +65671,7 @@ section {
   padding-right: 10px;
 }
 
-.team-boxed .row.people {
+.team-boxed .row.person {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -65761,7 +65761,7 @@ section {
     display: flex;
   }
 
-  .team-boxed .row.people {
+  .team-boxed .row.person {
     display: flex !important;
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
@@ -65783,11 +65783,11 @@ section {
     min-width: 0 !important;
   }
 
-  .team-boxed .row.people::-webkit-scrollbar {
+  .team-boxed .row.person::-webkit-scrollbar {
     display: none !important;
   }
 
-  .team-boxed .row.people {
+  .team-boxed .row.person {
     -ms-overflow-style: none !important;
     scrollbar-width: none !important;
   }
@@ -65799,7 +65799,7 @@ section {
     display: none !important;
   }
 
-  .team-boxed .row.people {
+  .team-boxed .row.person {
     flex-wrap: wrap;
     justify-content: center;
     gap: 5px; /* Reduzido de 20px para 10px */

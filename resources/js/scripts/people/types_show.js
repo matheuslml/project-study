@@ -1,4 +1,4 @@
-let selectType = $('select[name=peopleable_type]');
+let selectType = $('select[name=personable_type]');
 
 function loadTypes(obj) {
     let idType = $(obj).val();

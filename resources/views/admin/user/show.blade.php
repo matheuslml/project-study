@@ -307,7 +307,7 @@
                     <form id="editUserForm" method="POST" action="{{ route('pessoas.update', $user->person->id) }}" class="row gy-1 pt-75">
                       @csrf()
                       @method('PUT')
-                      <input type="text" value="pf" name="peopleable_type" id="peopleable_type" hidden/>
+                      <input type="text" value="pf" name="personable_type" id="personable_type" hidden/>
                       <div class="col-12">
                         <label class="form-label" for="person_name">Nome Completo</label>
                         <input
@@ -379,7 +379,7 @@
                           id="birthdate"
                           name="birthdate"
                           class="form-control"
-                          value="{{ date('Y-m-d',strtotime($user->person->peopleable->birthdate)) }}"
+                          value="{{ date('Y-m-d',strtotime($user->person->personable->birthdate)) }}"
                         />
                       </div>
                       @foreach($user->person->documents as $document)

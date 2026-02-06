@@ -10,19 +10,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 
-class PeopleMiddleware
+class PersonMiddleware
 {
     /**
      * Handle an incoming request.
      *
      * @param Request $request
      * @param Closure $next
-     * @param string $people
+     * @param string $person
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, string $people)
+    public function handle(Request $request, Closure $next, string $person)
     {
-        if (Auth::people()?->userType() === $people) {
+        if (Auth::person()?->userType() === $person) {
             return $next($request);
         }
 

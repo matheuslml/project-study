@@ -15,7 +15,7 @@ use App\Models\BlankPage;
 use App\Models\Gallery;
 use App\Models\Leadership;
 use App\Models\News;
-use App\Models\People;
+use App\Models\Person;
 use App\Models\Project;
 use App\Models\TypeRequest;
 use App\Models\Unit;
@@ -113,7 +113,7 @@ class BiddingController extends Controller
             $biddings = Bidding::with('modality')
             ->latest()
             ->get();
-            $possible_winners = People::whereDoesntHave('departaments')
+            $possible_winners = Person::whereDoesntHave('departaments')
                                         ->orderBy('full_name', 'asc')
                                         ->get();
             $modalities = BiddingModality::with('biddings')->orderBy('title', 'asc')->get();

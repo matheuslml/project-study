@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Api\People\PeopleResource;
+use App\Http\Resources\Api\Person\PersonResource;
 use Illuminate\Http\Request;
-use App\Models\People;
-use App\Services\PeopleService;
-use App\Services\PeopleCreateService;
-use App\Services\PeopleUpdateService;
-use App\Http\Requests\PeopleRequest;
-use App\Http\Requests\PeopleUpdateRequest;
+use App\Models\Person;
+use App\Services\PersonService;
+use App\Services\PersonCreateService;
+use App\Services\PersonUpdateService;
+use App\Http\Requests\PersonRequest;
+use App\Http\Requests\PersonUpdateRequest;
 use App\Models\Address;
-use App\Models\AddressPeople;
+use App\Models\AddressPerson;
 use App\Models\Audit;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Departament;
-use App\Models\DepartamentPeople;
+use App\Models\DepartamentPerson;
 use App\Models\Document;
 use App\Models\DocumentType;
 use App\Models\Email;
@@ -36,22 +36,22 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Storage;
 
-use App\Services\IndividualPeopleService;
-use App\Services\LegalPeopleService;
+use App\Services\IndividualPersonService;
+use App\Services\LegalPersonService;
 use App\Services\PhoneService;
 use App\Services\EmailService;
 use App\Services\AddressService;
 
 use Throwable;
 
-class PeopleController extends Controller
+class PersonController extends Controller
 {
     public function __construct(
-        protected PeopleCreateService $peopleCreateService,
-        protected PeopleUpdateService $peopleUpdateService,
-        protected PeopleService $peopleService,
-        protected IndividualPeopleService $individualPeopleService,
-        protected LegalPeopleService $legalPeopleService,
+        protected PersonCreateService $personCreateService,
+        protected PersonUpdateService $personUpdateService,
+        protected PersonService $personService,
+        protected IndividualPersonService $individualPersonService,
+        protected LegalPersonService $legalPersonService,
         protected EmailService $emailService,
         protected PhoneService $phoneService,
         protected AddressService $addressService,
@@ -67,7 +67,7 @@ class PeopleController extends Controller
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-        $users = User::with('person')->latest()->get(['id', 'email', 'people_id']);
+        $users = User::with('person')->latest()->get(['id', 'email', 'person_id']);
         return view('/admin/user/index', ['pageConfigs' => $pageConfigs], compact('users', 'unit', 'copyright'));
     }
 
@@ -115,7 +115,7 @@ class PeopleController extends Controller
     }
 
     public function store(
-        PeopleRequest $request
+        PersonRequest $request
     ){
         if (! Gate::allows('Criar Pessoas')) {
             return view('pages.not-authorized');
@@ -140,7 +140,7 @@ class PeopleController extends Controller
                         $request->request->add(['profile_photo_path' => $path]);
                     }
 
-                    $this->peopleCreateService->create($request->toArray());
+                    $this->personCreateService->create($request->toArray());
                     flash('Registro criado com sucesso!')->success();
                 }
                 else{
@@ -148,7 +148,7 @@ class PeopleController extends Controller
                 }
             }
             else{
-                $this->peopleCreateService->create($request->toArray());
+                $this->personCreateService->create($request->toArray());
                 flash('Registro criado com sucesso!')->success();
 
             }
@@ -164,14 +164,14 @@ class PeopleController extends Controller
     }
 
     public function update(
-        PeopleUpdateRequest $request, $people_id
+        PersonUpdateRequest $request, $person_id
     ){
         if (! Gate::allows('Editar Pessoas')) {
             return view('pages.not-authorized');
         };
         try {
             DB::beginTransaction();
-            $this->peopleUpdateService->update($request->toArray(), $people_id);
+            $this->personUpdateService->update($request->toArray(), $person_id);
 
             flash('Usuário editado com sucesso!')->success();
             DB::commit();
@@ -190,17 +190,17 @@ class PeopleController extends Controller
         }
 
         try{
-            $person = People::find($person);
+            $person = Person::find($person);
             $person->delete();
             flash('Usuário deletado com sucesso!')->success();
         } catch (\Exception $exception) {
             flash('Erro ao deletar o Usuário!')->error();
         }
-        $people = $this->peopleService->paginate(10);
-        return view('admin.user.index', compact('people'));
+        $person = $this->personService->paginate(10);
+        return view('admin.user.index', compact('person'));
     }
 
-    public function store_people()
+    public function store_person()
     {
 
         $users_list = User::with('person')->get();
@@ -216,39 +216,39 @@ class PeopleController extends Controller
                     );
 
 
-                $people = match ('pf') {
-                    'pj' => $this->legalPeopleService->create($userData),
-                    'pf' => $this->individualPeopleService->create($userData),
+                $person = match ('pf') {
+                    'pj' => $this->legalPersonService->create($userData),
+                    'pf' => $this->individualPersonService->create($userData),
                 default => throw new Exception('Tipo de pessoal não selecionado')
                 };
 
-                $new_person = $people->peopleable()->create($userData);
+                $new_person = $person->personable()->create($userData);
 
-                $people_id = $new_person->id;
-                var_dump($people_id);
+                $person_id = $new_person->id;
+                var_dump($person_id);
 
                 $user = User::find($user->id);
-                $user->people_id = $people_id;
+                $user->person_id = $person_id;
                 $user->save();
 
                 Document::create(
                     [
                     'document' => "00000000" . $user->id,
-                    'people_id' => $people_id,
+                    'person_id' => $person_id,
                     'document_type_id' => 7,
                     ]
                 );
                 Document::create(
                     [
                     'document' => "00000000" . $user->id,
-                    'people_id' => $people_id,
+                    'person_id' => $person_id,
                     'document_type_id' => 2,
                     ]
                 );
                 Document::create(
                     [
                     'document' => "00000000" . $user->id,
-                    'people_id' => $people_id,
+                    'person_id' => $person_id,
                     'document_type_id' => 8,
                     ]
                 );
@@ -256,14 +256,14 @@ class PeopleController extends Controller
                 Email::create(
                     [
                     'email' => $user->email,
-                    'people_id' => $people_id,
+                    'person_id' => $person_id,
                     ]
                 );
 
                 Phone::create(
                     [
                     'phone' => "999999999",
-                    'people_id' => $people_id,
+                    'person_id' => $person_id,
                     ]
                 );
 
@@ -276,21 +276,21 @@ class PeopleController extends Controller
                     'postal_code' => "28930-000",
                     'neighborhood' => "bairro",
                     'city_id' => 3570,
-                    'people_id' => $people_id,
+                    'person_id' => $person_id,
                     ]
                 );
 
-                AddressPeople::create(
+                AddressPerson::create(
                     [
-                    'people_id' => $people_id,
+                    'person_id' => $person_id,
                     'address_id' => $address->id,
                     ]
                 );
 
-                DepartamentPeople::create(
+                DepartamentPerson::create(
                     [
                     'departament_id' => 1,
-                    'people_id' => $people_id,
+                    'person_id' => $person_id,
                     ]
                 );
 
@@ -310,7 +310,7 @@ class PeopleController extends Controller
 
         $pageConfigs = ['pageHeader' => false];
 
-        $users = User::with('person')->latest()->get(['id', 'email', 'people_id']);
+        $users = User::with('person')->latest()->get(['id', 'email', 'person_id']);
         return view('/admin/user/index', ['pageConfigs' => $pageConfigs], compact('users'));
     }
 }

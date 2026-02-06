@@ -7,7 +7,7 @@ use App\Http\Requests\DocumentRequest;
 use App\Models\Document;
 use App\Models\DocumentType;
 use Illuminate\Http\Request;
-use App\Services\PeopleService;
+use App\Services\PersonService;
 use App\Services\DocumentService;
 use App\Services\DocumentCreateService;
 use App\Services\DocumentUpdateService;
@@ -18,13 +18,13 @@ use Illuminate\Support\Facades\Gate;
 class DocumentController extends Controller
 {
     public function __construct(
-        protected PeopleService $peopleService,
+        protected PersonService $personService,
         protected DocumentService $documentService,
         protected DocumentCreateService $documentCreateService,
         protected DocumentUpdateService $documentUpdateService,
     ){}
 
-    public function index_people_document($person_id): View
+    public function index_person_document($person_id): View
     {
         if (! Gate::allows('Ver e Listar Documentos')) {
             return view('pages.not-authorized');
@@ -32,8 +32,8 @@ class DocumentController extends Controller
 
         try{
             $type_documents = DocumentType::all();
-            $person = $this->peopleService->show($person_id);
-            return view('admin.document.people_document', compact('person', 'type_documents'));
+            $person = $this->personService->show($person_id);
+            return view('admin.document.person_document', compact('person', 'type_documents'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar os Documentos Cadastrados!')->error();
             return redirect()->back()->withInput();

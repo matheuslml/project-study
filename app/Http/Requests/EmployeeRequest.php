@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\People;
+use App\Models\Person;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -29,11 +29,11 @@ class EmployeeRequest extends FormRequest
         return [
             'registry'    => [
             ],
-            'people_id'    => [
-                Rule::exists(People::class, 'id')
+            'person_id'    => [
+                Rule::exists(Person::class, 'id')
             ],
             'departament_id'    => [
-                Rule::exists(People::class, 'id')
+                Rule::exists(Person::class, 'id')
             ],
         ];
     }
@@ -42,7 +42,7 @@ class EmployeeRequest extends FormRequest
     {
         return [
             'registry'                 => 'registro',
-            'people_id'                 => 'pessoa',
+            'person_id'                 => 'pessoa',
             'departament_id'                 => 'departamento',
         ];
     }

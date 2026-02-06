@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use App\Models\AddressPeople;
-use App\Models\DepartamentPeople;
+use App\Models\AddressPerson;
+use App\Models\DepartamentPerson;
 use App\Models\OccupationUser;
-use App\Models\PeopleAddress;
+use App\Models\PersonAddress;
 use App\Models\User;
 //use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Exception;
@@ -14,15 +14,15 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Auth\Events\Registered;
 
-class PeopleCreateService
+class PersonCreateService
 {
     // @codingStandardsIgnoreStart
     // TODO: CSFix
     public function __construct(
         protected UserService $userService,
-        protected IndividualPeopleService $individualPeopleService,
-        protected LegalPeopleService $legalPeopleService,
-        protected PeopleService $peopleService,
+        protected IndividualPersonService $individualPersonService,
+        protected LegalPersonService $legalPersonService,
+        protected PersonService $personService,
         protected EmailService $emailService,
         protected PhoneService $phoneService,
         protected AddressService $addressService,
@@ -43,16 +43,16 @@ class PeopleCreateService
                 ]
             );
 
-            $people = match ($request['peopleable_type']) {
-                'pj' => $this->legalPeopleService->create($userData),
-                'pf' => $this->individualPeopleService->create($userData),
+            $person = match ($request['personable_type']) {
+                'pj' => $this->legalPersonService->create($userData),
+                'pf' => $this->individualPersonService->create($userData),
             default => throw new Exception('Tipo de pessoal não selecionado')
             };
 
-                $people->peopleable()->create($userData);
+                $person->personable()->create($userData);
                 foreach ($request['documents']['document_type'] as $key => $documents) {
                     if ($request['documents']['document'][$key]) {
-                        $people->peopleable->documents()->create(
+                        $person->personable->documents()->create(
                             [
                             'document_type_id' => $request['documents']['document_type'][$key],
                             'document' => $request['documents']['document'][$key],
@@ -61,13 +61,13 @@ class PeopleCreateService
                     }
                 }
 
-                $people_id = $people->peopleable->id;
+                $person_id = $person->personable->id;
 
                 if(isset($request['profile_photo_path'])){
                     $user = User::create([
                         'name' => $request['name'],
                         'email' => $request['email'],
-                        'people_id' => $people_id,
+                        'person_id' => $person_id,
                         'password' => Hash::make($request['password']),
                         'profile_photo_path' => $request['profile_photo_path']
                     ]);
@@ -77,7 +77,7 @@ class PeopleCreateService
                     $user = User::create([
                         'name' => $request['name'],
                         'email' => $request['email'],
-                        'people_id' => $people_id,
+                        'person_id' => $person_id,
                         'password' => Hash::make($request['password'])
                     ]);
                     event(new Registered($user));
@@ -88,7 +88,7 @@ class PeopleCreateService
                     array_merge(
                         $request,
                         $userData,
-                        compact('people_id')
+                        compact('person_id')
                     )
                 );
 
@@ -97,7 +97,7 @@ class PeopleCreateService
                         array_merge(
                             $request,
                             $userData,
-                            compact('people_id')
+                            compact('person_id')
                         )
                     );
                 }
@@ -113,18 +113,18 @@ class PeopleCreateService
                     ]
                 );
 
-                AddressPeople::create(
+                AddressPerson::create(
                     [
-                    'people_id' => $people_id,
+                    'person_id' => $person_id,
                     'address_id' => $address->id,
                     ]
                 );
 
                 if(isset($request['departament_id'])){
-                    DepartamentPeople::create(
+                    DepartamentPerson::create(
                         [
                         'departament_id' => $request['departament_id'],
-                        'people_id' => $people_id,
+                        'person_id' => $person_id,
                         ]
                     );
                 }

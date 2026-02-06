@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\People;
+use App\Models\Person;
 use App\Models\Unit;
 use App\Models\Copyright;
 use App\Models\User;
@@ -68,8 +68,8 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
     // User List Page
     public function user_list()
     {
-        //$people = People::with('user')->get(['id', 'full_name', 'social_name', 'created_at']);
-        $users = User::with('person')->get(['id', 'email', 'people_id']);
+        //$person = Person::with('user')->get(['id', 'full_name', 'social_name', 'created_at']);
+        $users = User::with('person')->get(['id', 'email', 'person_id']);
         $pageConfigs = ['pageHeader' => false];
 
             $unit = Unit::where('web', true)->first();

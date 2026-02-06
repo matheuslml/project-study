@@ -14,8 +14,8 @@ use App\Repositories\Eloquent\MatrialStatusEloquentRepository;
 use App\Repositories\Eloquent\EmailEloquentRepository;
 use App\Repositories\Eloquent\EmailCreateEloquentRepository;
 use App\Repositories\Eloquent\EmailUpdateEloquentRepository;
-use App\Repositories\Eloquent\IndividualPeopleEloquentRepository;
-use App\Repositories\Eloquent\LegalPeopleEloquentRepository;
+use App\Repositories\Eloquent\IndividualPersonEloquentRepository;
+use App\Repositories\Eloquent\LegalPersonEloquentRepository;
 use App\Repositories\Eloquent\NotificationEloquentRepository;
 use App\Repositories\Eloquent\NotificationCreateEloquentRepository;
 use App\Repositories\Eloquent\NotificationUpdateEloquentRepository;
@@ -23,9 +23,9 @@ use App\Repositories\Eloquent\NotificationUserEloquentRepository;
 use App\Repositories\Eloquent\OccupationEloquentRepository;
 use App\Repositories\Eloquent\OccupationCreateEloquentRepository;
 use App\Repositories\Eloquent\OccupationUpdateEloquentRepository;
-use App\Repositories\Eloquent\PeopleEloquentRepository;
-use App\Repositories\Eloquent\PeopleCreateEloquentRepository;
-use App\Repositories\Eloquent\PeopleUpdateEloquentRepository;
+use App\Repositories\Eloquent\PersonEloquentRepository;
+use App\Repositories\Eloquent\PersonCreateEloquentRepository;
+use App\Repositories\Eloquent\PersonUpdateEloquentRepository;
 use App\Repositories\Eloquent\PhoneEloquentRepository;
 use App\Repositories\Eloquent\PhoneCreateEloquentRepository;
 use App\Repositories\Eloquent\PhoneUpdateEloquentRepository;
@@ -251,15 +251,15 @@ use App\Services\MatrialStatusService;
 use App\Services\EmailService;
 use App\Services\EmailCreateService;
 use App\Services\EmailUpdateService;
-use App\Services\IndividualPeopleService;
-use App\Services\LegalPeopleService;
+use App\Services\IndividualPersonService;
+use App\Services\LegalPersonService;
 use App\Services\NotificationService;
 use App\Services\NotificationCreateService;
 use App\Services\NotificationUpdateService;
 use App\Services\NotificationUserService;
-use App\Services\PeopleService;
-use App\Services\PeopleCreateService;
-use App\Services\PeopleUpdateService;
+use App\Services\PersonService;
+use App\Services\PersonCreateService;
+use App\Services\PersonUpdateService;
 use App\Services\PhoneService;
 use App\Services\PhoneCreateService;
 use App\Services\PhoneUpdateService;
@@ -490,15 +490,15 @@ class EloquentRepositoryProvider extends ServiceProvider
         //DocumentCreateService::class => DocumentCreateEloquentRepository::class,
         //DocumentUpdateService::class => DocumentUpdateEloquentRepository::class,
         DocumentTypeService::class => DocumentTypeEloquentRepository::class,
-        IndividualPeopleService::class => IndividualPeopleEloquentRepository::class,
-        LegalPeopleService::class => LegalPeopleEloquentRepository::class,
+        IndividualPersonService::class => IndividualPersonEloquentRepository::class,
+        LegalPersonService::class => LegalPersonEloquentRepository::class,
         NotificationService::class => NotificationEloquentRepository::class,
         NotificationCreateService::class => NotificationCreateEloquentRepository::class,
         NotificationUpdateService::class => NotificationUpdateEloquentRepository::class,
         NotificationUserService::class => NotificationUserEloquentRepository::class,
-        PeopleService::class => PeopleEloquentRepository::class,
-        PeopleCreateService::class => PeopleCreateEloquentRepository::class,
-        PeopleUpdateService::class => PeopleUpdateEloquentRepository::class,
+        PersonService::class => PersonEloquentRepository::class,
+        PersonCreateService::class => PersonCreateEloquentRepository::class,
+        PersonUpdateService::class => PersonUpdateEloquentRepository::class,
         PhoneService::class => PhoneEloquentRepository::class,
         PhoneCreateService::class => PhoneCreateEloquentRepository::class,
         PhoneUpdateService::class => PhoneUpdateEloquentRepository::class,

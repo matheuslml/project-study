@@ -21,12 +21,12 @@ class Email extends Model implements Auditable
     protected $fillable = [
         'email',
         'type',
-        'people_id'
+        'person_id'
     ];
 
-    public function people(): BelongsTo
+    public function person(): BelongsTo
     {
-        return $this->belongsTo(people::class, 'people_id');
+        return $this->belongsTo(person::class, 'person_id');
     }
 
     public function setEmailAttribute($value): void

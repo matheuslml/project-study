@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePeopleTypesTable extends Migration
+class CreatePersonIdUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreatePeopleTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('people_types', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('slug');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('person_id')->after('email')->nullable()->constrained('people');
         });
     }
 
@@ -29,6 +25,8 @@ class CreatePeopleTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('people_types');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('person_id');
+        });
     }
 }

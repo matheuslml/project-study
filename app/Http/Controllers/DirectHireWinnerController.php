@@ -11,12 +11,12 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Genre;
 use App\Models\MatrialStatus;
-use App\Models\People;
+use App\Models\Person;
 use App\Models\State;
 use App\Models\TypeRequest;
 use App\Models\Unit;
 use App\Models\Copyright;
-use App\Services\PeopleService;
+use App\Services\PersonService;
 use App\Services\DirectHireWinnerService;
 use App\Services\DirectHireWinnerCreateService;
 use App\Services\DirectHireWinnerUpdateService;
@@ -29,7 +29,7 @@ class DirectHireWinnerController extends Controller
 {
 
     public function __construct(
-        protected PeopleService $peopleService,
+        protected PersonService $personService,
         protected DirectHireWinnerService $directHireWinnerService,
         protected DirectHireWinnerCreateService $directHireWinnerCreateService,
         protected DirectHireWinnerUpdateService $directHireWinnerUpdateService,
@@ -47,10 +47,10 @@ class DirectHireWinnerController extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-            $people = People::whereDoesntHave('departaments')
+            $person = Person::whereDoesntHave('departaments')
                                         ->latest()
                                         ->get();
-            return view('admin.directHire.winner_index', ['pageConfigs' => $pageConfigs], compact('people', 'unit', 'copyright'));
+            return view('admin.directHire.winner_index', ['pageConfigs' => $pageConfigs], compact('person', 'unit', 'copyright'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Assuntos Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -111,8 +111,8 @@ class DirectHireWinnerController extends Controller
             $states = State::all();
             $cities = City::all();
 
-            $person = $this->peopleService->show($winner_id);
-            $directs_hires_winner = DirectHireWinner::where('people_id', $winner_id)
+            $person = $this->personService->show($winner_id);
+            $directs_hires_winner = DirectHireWinner::where('person_id', $winner_id)
                                             ->latest()
                                             ->get();
             return view('admin.directHire.winner_show', compact('person', 'unit', 'copyright', 'directs_hires_winner', 'genres', 'matrial_statuses', 'countries', 'states', 'cities'));
@@ -173,7 +173,7 @@ class DirectHireWinnerController extends Controller
 
             foreach($request['items'] as $key => $item_id){
                 $fileData = array(
-                    "people_id" => $person_id
+                    "person_id" => $person_id
                 );
                 $this->directHireItemUpdateService->update($fileData, $item_id);
             }
@@ -198,7 +198,7 @@ class DirectHireWinnerController extends Controller
 
             foreach($request['remove_items'] as $key => $item_id){
                 $fileData = array(
-                    "people_id" => NULL
+                    "person_id" => NULL
                 );
                 $this->directHireItemUpdateService->update($fileData, $item_id);
             }
@@ -245,7 +245,7 @@ class DirectHireWinnerController extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $type_requests = TypeRequest::all();
-            $person = $this->peopleService->show($winner_id);
+            $person = $this->personService->show($winner_id);
             return view('web.directHire.winner_show', compact('service_pages', 'institucional_pages', 'person', 'type_requests', 'unit', 'copyright'));
         } catch (\Throwable $throwable) {
             flash('Erro ao buscar registro!')->error();

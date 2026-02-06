@@ -37,7 +37,7 @@
               @endif
               <form class="auth-register-form mt-2" action="{{ route('pessoas.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf()
-                  <input type="text" name="peopleable_type" id="peopleable_type" value="pf" hidden />
+                  <input type="text" name="personable_type" id="personable_type" value="pf" hidden />
                   <div class="content-header mb-2">
                         <h2 class="fw-bolder mb-75">Informações de Login</h2>
                         <span>entre com os dados para login</span>

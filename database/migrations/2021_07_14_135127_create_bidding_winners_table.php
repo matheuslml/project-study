@@ -16,7 +16,7 @@ class CreateBiddingWinnersTable extends Migration
         Schema::create('bidding_winners', function (Blueprint $table) {
             $table->id();
             $table->foreignId('bidding_id')->constrained('biddings');
-            $table->foreignId('people_id')->constrained('people');
+            $table->foreignId('person_id')->constrained('people');
             $table->timestamps();
         });
     }

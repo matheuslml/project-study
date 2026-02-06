@@ -22,7 +22,7 @@ class Document extends Model implements Auditable
         'document',
         'expires_at',
         'document_type_id',
-        'people_id'
+        'person_id'
     ];
 
     protected $dates = [

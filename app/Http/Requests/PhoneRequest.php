@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\People;
+use App\Models\Person;
 use App\Models\Phone;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -35,8 +35,8 @@ class PhoneRequest extends FormRequest
                 'min:3',
                 'max:150'
             ],
-            'people_id'    => [
-                Rule::exists(People::class, 'id')
+            'person_id'    => [
+                Rule::exists(Person::class, 'id')
             ],
         ];
     }
@@ -47,7 +47,7 @@ class PhoneRequest extends FormRequest
             'phone.required' => 'É obrigatório colocar um celular.',
             'phone.min' => 'O nome tem que ter de 3 a 150 caracteres.',
             'phone.max' => 'O nome tem que ter de 3 a 150 caracteres.',
-            'people_id.required' => 'É obrigatório colocar um dono do celular.',
+            'person_id.required' => 'É obrigatório colocar um dono do celular.',
         ];
     }
     
@@ -55,7 +55,7 @@ class PhoneRequest extends FormRequest
     {
         return [
             'email'                    => 'celular',
-            'people_id'                => 'pessoa',
+            'person_id'                => 'pessoa',
         ];
     }
 }

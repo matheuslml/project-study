@@ -72,7 +72,7 @@
               id="birthdate"
               name="birthdate"
               class="form-control"
-              value="{{ date('Y-m-d',strtotime($user->person->peopleable->birthdate)) }}"
+              value="{{ date('Y-m-d',strtotime($user->person->personable->birthdate)) }}"
             />
           </div>
           @foreach($user->person->documents as $document)

@@ -18,7 +18,7 @@ class DirectHireItem extends Model implements Auditable
 
     protected $fillable = [
         'direct_hire_id',
-        'people_id',
+        'person_id',
         'quantity',
         'name',
         'value'
@@ -31,6 +31,6 @@ class DirectHireItem extends Model implements Auditable
 
     public function person(): BelongsTo
     {
-        return $this->belongsTo(People::class, 'people_id');
+        return $this->belongsTo(Person::class, 'person_id');
     }
 }

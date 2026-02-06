@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('file_official_diary', function (Blueprint $table) {
+        Schema::create('file_official_diaries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('file_id')->constrained('files');
             $table->foreignId('official_diary_id')->constrained('official_diaries');

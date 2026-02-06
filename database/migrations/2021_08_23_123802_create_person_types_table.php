@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePeoplePeopleTypeTable extends Migration
+class CreatePersonTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreatePeoplePeopleTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('people_people_type', function (Blueprint $table) {
+        Schema::create('person_types', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('people_id')->constrained('people');
-            $table->foreignId('people_type_id')->constrained('people_types');
+            $table->string('title');
+            $table->string('slug');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +29,6 @@ class CreatePeoplePeopleTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('people_people_type');
+        Schema::dropIfExists('person_types');
     }
 }

@@ -11,12 +11,12 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Genre;
 use App\Models\MatrialStatus;
-use App\Models\People;
+use App\Models\Person;
 use App\Models\State;
 use App\Models\TypeRequest;
 use App\Models\Unit;
 use App\Models\Copyright;
-use App\Services\PeopleService;
+use App\Services\PersonService;
 use App\Services\BiddingWinnerService;
 use App\Services\BiddingWinnerCreateService;
 use App\Services\BiddingWinnerUpdateService;
@@ -29,7 +29,7 @@ class BiddingWinnerController extends Controller
 {
 
     public function __construct(
-        protected PeopleService $peopleService,
+        protected PersonService $personService,
         protected BiddingWinnerService $biddingWinnerService,
         protected BiddingWinnerCreateService $biddingWinnerCreateService,
         protected BiddingWinnerUpdateService $biddingWinnerUpdateService,
@@ -47,10 +47,10 @@ class BiddingWinnerController extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-            $people = People::whereDoesntHave('departaments')
+            $person = Person::whereDoesntHave('departaments')
                                         ->latest()
                                         ->get();
-            return view('admin.bidding.winner_index', ['pageConfigs' => $pageConfigs], compact('people', 'unit', 'copyright'));
+            return view('admin.bidding.winner_index', ['pageConfigs' => $pageConfigs], compact('person', 'unit', 'copyright'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Assuntos Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -112,8 +112,8 @@ class BiddingWinnerController extends Controller
             $states = State::all();
             $cities = City::all();
 
-            $person = $this->peopleService->show($winner_id);
-            $biddings_winner = BiddingWinner::where('people_id', $winner_id)
+            $person = $this->personService->show($winner_id);
+            $biddings_winner = BiddingWinner::where('person_id', $winner_id)
                                             ->latest()
                                             ->get();
             return view('admin.bidding.winner_show', compact('person', 'unit', 'copyright', 'biddings_winner', 'genres', 'matrial_statuses', 'countries', 'states', 'cities'));
@@ -174,7 +174,7 @@ class BiddingWinnerController extends Controller
 
             foreach($request['items'] as $key => $item_id){
                 $fileData = array(
-                    "people_id" => $person_id
+                    "person_id" => $person_id
                 );
                 $this->biddingItemUpdateService->update($fileData, $item_id);
             }
@@ -199,7 +199,7 @@ class BiddingWinnerController extends Controller
 
             foreach($request['remove_items'] as $key => $item_id){
                 $fileData = array(
-                    "people_id" => NULL
+                    "person_id" => NULL
                 );
                 $this->biddingItemUpdateService->update($fileData, $item_id);
             }
@@ -246,7 +246,7 @@ class BiddingWinnerController extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $type_requests = TypeRequest::all();
-            $person = $this->peopleService->show($winner_id);
+            $person = $this->personService->show($winner_id);
             return view('web.bidding.winner_show', compact('service_pages', 'institucional_pages', 'person', 'type_requests', 'unit', 'copyright'));
         } catch (\Throwable $throwable) {
             flash('Erro ao buscar registro!')->error();

@@ -17,7 +17,7 @@ class CreateEmailsTable extends Migration
             $table->id();
             $table->string('email');
             $table->enum('type', ['pessoal', 'comercial'])->default('pessoal');
-            $table->foreignId('people_id')->constrained('people');
+            $table->foreignId('person_id')->constrained('people');
             $table->softDeletes();
             $table->timestamps();
         });

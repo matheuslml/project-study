@@ -16,7 +16,7 @@ class CreateDepartamentPeopleTable extends Migration
         Schema::create('departament_people', function (Blueprint $table) {
             $table->id();
             $table->foreignId('departament_id')->constrained('departaments');
-            $table->foreignId('people_id')->constrained('people');
+            $table->foreignId('person_id')->constrained('people');
             $table->timestamps();
         });
     }

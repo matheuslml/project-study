@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePhonesTable extends Migration
+class CreatePersonPersonTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreatePhonesTable extends Migration
      */
     public function up()
     {
-        Schema::create('phones', function (Blueprint $table) {
+        Schema::create('person_person_type', function (Blueprint $table) {
             $table->id();
-            $table->string('phone');
-            $table->enum('type', ['pessoal', 'comercial'])->default('pessoal');
             $table->foreignId('person_id')->constrained('people');
-            $table->softDeletes();
+            $table->foreignId('person_type_id')->constrained('person_types');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +29,6 @@ class CreatePhonesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phones');
+        Schema::dropIfExists('person_person_type');
     }
 }

@@ -13,7 +13,7 @@ class PhoneUpdateService
     // TODO: CSFix
     public function __construct(
         protected UserService $userService,
-        protected PeopleService $peopleService,
+        protected PersonService $personService,
         protected PhoneService $phoneService,
     ) {
         //

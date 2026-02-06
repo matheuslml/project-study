@@ -13,7 +13,7 @@ use App\Models\DirectHire;
 use App\Models\DirectHireModality;
 use App\Models\DirectHireSituations;
 use App\Models\DirectHireWinner;
-use App\Models\People;
+use App\Models\Person;
 use App\Models\Unit;
 use App\Models\Copyright;
 use Illuminate\Http\Request;
@@ -39,7 +39,7 @@ class HiringReportsController extends Controller
             $direct_hires = DirectHire::all();
             $direct_hire_modalities = DirectHireModality::orderBy('title', 'asc')->get();
             $direct_hire_situations = DirectHireSituations::orderBy('title', 'asc')->get();
-            $direct_hire_winners = People::whereDoesntHave('departaments')
+            $direct_hire_winners = Person::whereDoesntHave('departaments')
                                         ->orderBy('full_name', 'asc')
                                         ->get();
 

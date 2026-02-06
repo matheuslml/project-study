@@ -18,7 +18,7 @@
                 <!-- SHORTCUT ICONS -->
             <div class="team-boxed">
                 <div class="container">
-                    <div class="row people">
+                    <div class="row person">
                         @foreach ($management_reports as $management_report)
                             <div class="col-md-3 col-lg-3 item">
                                 @if (isset($management_report->file))

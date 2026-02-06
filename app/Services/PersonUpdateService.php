@@ -3,21 +3,21 @@
 namespace App\Services;
 
 use App\Models\OccupationUser;
-use App\Models\People;
+use App\Models\Person;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class PeopleUpdateService
+class PersonUpdateService
 {
     // TODO: verificar imagem , editar user
     public function __construct(
         protected UserService $userService,
-        protected IndividualPeopleService $individualPeopleService,
-        protected LegalPeopleService $legalPeopleService,
+        protected IndividualPersonService $individualPersonService,
+        protected LegalPersonService $legalPersonService,
         protected DocumentService $documentService,
-        protected PeopleService $peopleService,
+        protected PersonService $personService,
         protected EmailService $emailService,
         protected PhoneService $phoneService,
         protected AddressService $addressService,
@@ -25,35 +25,35 @@ class PeopleUpdateService
         //
     }
     
-    public function update(array $request, $people_id)
+    public function update(array $request, $person_id)
     {
         try {
             DB::beginTransaction();
-            if($request['peopleable_type'] == 'pj'){
+            if($request['personable_type'] == 'pj'){
                 $userData = array_merge(
                     $request,
                     [
                         'full_name'      => $request['person_name'] ?? $request['company_name'],
-                        'peopleable_type'      => 'App\Models\LegalPeople'
+                        'personable_type'      => 'App\Models\LegalPerson'
                     ]
                 );
             }
-            if($request['peopleable_type'] == 'pf'){
+            if($request['personable_type'] == 'pf'){
                 $userData = array_merge(
                     $request,
                     [
                         'full_name'      => $request['person_name'] ?? $request['company_name'],
-                        'peopleable_type'      => 'App\Models\IndividualPeople'
+                        'personable_type'      => 'App\Models\IndividualPerson'
                     ]
                 );
             }
 
-            $person = People::find($people_id);
+            $person = Person::find($person_id);
 
-            $this->peopleService->update($userData, $people_id);
-            match ($userData['peopleable_type']) {
-                'App\Models\LegalPeople' => $this->legalPeopleService->update($userData, $person->peopleable_id),
-                'App\Models\IndividualPeople' => $this->individualPeopleService->update($userData, $person->peopleable_id),
+            $this->personService->update($userData, $person_id);
+            match ($userData['personable_type']) {
+                'App\Models\LegalPerson' => $this->legalPersonService->update($userData, $person->personable_id),
+                'App\Models\IndividualPerson' => $this->individualPersonService->update($userData, $person->personable_id),
             default => throw new Exception('Tipo de pessoal não selecionado')
             };
 

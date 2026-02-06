@@ -2,20 +2,18 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\People;
-use App\Repositories\EloquentRepository;
+use App\Models\Person;
+use App\Repositories\EloquentRepository as parentAlias;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use JetBrains\PhpStorm\Pure;
 
-class PeopleUpdateEloquentRepository extends EloquentRepository
+class PersonEloquentRepository extends parentAlias
 {
-    #[Pure]
     public function __construct()
     {
-        parent::__construct(new People());
+        parent::__construct(new Person());
     }
 
     public function get(): Collection
@@ -23,12 +21,12 @@ class PeopleUpdateEloquentRepository extends EloquentRepository
         return parent::get();
     }
 
-    public function create($data): People | Model
+    public function create($data): Person | Model
     {
         return parent::create($data);
     }
 
-    public function find($id): People | Model
+    public function find($id): Person | Model
     {
         return parent::find($id);
     }
@@ -38,22 +36,22 @@ class PeopleUpdateEloquentRepository extends EloquentRepository
         return parent::withTrashed();
     }
 
-    public function update($id, $data): People | Model
+    public function update($id, $data): Person | Model
     {
         return parent::update($id, $data);
     }
 
-    public function delete($id): People | Model
+    public function delete($id): Person | Model
     {
         return parent::delete($id);
     }
 
-    public function restore($id): People | Model
+    public function restore($id): Person | Model
     {
         return parent::restore($id);
     }
 
-    public function forceDelete($id): People | Model
+    public function forceDelete($id): Person | Model
     {
         return parent::forceDelete($id);
     }

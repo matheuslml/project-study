@@ -16,7 +16,7 @@ class CreateDirectHireWinnersTable extends Migration
         Schema::create('direct_hire_winners', function (Blueprint $table) {
             $table->id();
             $table->foreignId('direct_hire_id')->constrained('direct_hires');
-            $table->foreignId('people_id')->constrained('people');
+            $table->foreignId('person_id')->constrained('people');
             $table->timestamps();
         });
     }

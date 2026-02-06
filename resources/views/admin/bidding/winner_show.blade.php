@@ -46,11 +46,11 @@
                   </div>
                   <div class="row">
                     <div class="mb-1 col-md-4">
-                      <label class="form-label" for="peopleable_type">Tipo de Pessoa</label>
-                      <select class="form-select input-admin" id="peopleable_type" name="peopleable_type" onchange="type_people();">
+                      <label class="form-label" for="personable_type">Tipo de Pessoa</label>
+                      <select class="form-select input-admin" id="personable_type" name="personable_type" onchange="type_person();">
                         <option value="" class="">Tipos</option>
-                        <option value="pj" {{ $person->peopleable_type==='App\Models\LegalPeople' ? 'selected' : '' }} >Pessoa Jurídica</option>
-                        <option value="pf" {{ $person->peopleable_type==='App\Models\IndividualPeople' ? 'selected' : '' }} >Pessoa Física</option>
+                        <option value="pj" {{ $person->personable_type==='App\Models\LegalPerson' ? 'selected' : '' }} >Pessoa Jurídica</option>
+                        <option value="pf" {{ $person->personable_type==='App\Models\IndividualPerson' ? 'selected' : '' }} >Pessoa Física</option>
                       </select>
                     </div>
                     <div class="mb-1 col-md-8 pf " style="display: none;">
@@ -60,11 +60,11 @@
 
                     <div class="mb-1 col-md-8 pj" style="display: none;">
                       <label class="form-label" for="company_name">Nome da Empresa</label>
-                      <input type="text" value="{{ $person->peopleable->company_name }}" name="company_name" id="company_name" class="form-control" placeholder="nome" />
+                      <input type="text" value="{{ $person->personable->company_name }}" name="company_name" id="company_name" class="form-control" placeholder="nome" />
                     </div>
                     <div class="mb-1 col-md-6 pj" style="display: none;">
                       <label class="form-label" for="legal_responsible">Nome do Representante Legal</label>
-                      <input type="text" value="{{ $person->peopleable->legal_responsible }}" name="legal_responsible" id="legal_responsible" class="form-control" placeholder="nome" />
+                      <input type="text" value="{{ $person->personable->legal_responsible }}" name="legal_responsible" id="legal_responsible" class="form-control" placeholder="nome" />
                     </div>
                     <div class="mb-1 col-md-6 pf" style="display: none;">
                       <label class="form-label" for="social_name">Nome Social (apelido, alcunha, designação, etc) </label>
@@ -110,7 +110,7 @@
                         name="birthdate"
                         id="birthdate"
                         class="form-control"
-                        value="{{ date('Y-m-d',strtotime($person->peopleable->birthdate)) }}"
+                        value="{{ date('Y-m-d',strtotime($person->personable->birthdate)) }}"
                       />
                     </div>
 
@@ -395,7 +395,7 @@
 <script src="{{ asset(mix('js/scripts/departament/departament.js')) }}"></script>
   <script src="{{ asset(mix('js/scripts/tables/biddings.js')) }}"></script>
 <script src="{{ asset(mix('js/scripts/address/address.js')) }}"></script>
-<script src="{{ asset(mix('js/scripts/people/types_show.js')) }}"></script>
+<script src="{{ asset(mix('js/scripts/person/types_show.js')) }}"></script>
 <script src="{{asset(mix('js/scripts/pages/auth-register.js'))}}"></script>
 <script src="{{ asset(mix('js/scripts/forms/form-input-mask.js')) }}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-select2.js')) }}"></script>

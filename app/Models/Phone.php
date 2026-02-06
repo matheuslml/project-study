@@ -21,11 +21,11 @@ class Phone extends Model implements Auditable
     protected $fillable = [
         'phone',
         'type',
-        'people_id'
+        'person_id'
     ];
 
-    public function people(): BelongsTo
+    public function person(): BelongsTo
     {
-        return $this->belongsTo(People::class, 'people_id');
+        return $this->belongsTo(Person::class, 'person_id');
     }
 }

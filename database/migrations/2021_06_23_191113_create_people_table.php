@@ -20,7 +20,7 @@ class CreatePeopleTable extends Migration
             $table->id();
             $table->string('full_name')->index();
             $table->string('social_name')->nullable();
-            $table->morphs('peopleable'); 
+            $table->morphs('personable'); 
             $table->foreignId('genre')->nullable()->constrained('genres');
             $table->foreignId('matrial_status')->nullable()->constrained('matrial_statuses');
             $table->string('status')->default('active')->index();

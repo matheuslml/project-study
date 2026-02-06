@@ -5,10 +5,10 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class PeopleUpdateRequest extends FormRequest
+class PersonRequest extends FormRequest
 {
     /**
-     * Determine if the People is authorized to make this request. 
+     * Determine if the Person is authorized to make this request.
      *
      * @return bool
      */
@@ -44,7 +44,7 @@ class PeopleUpdateRequest extends FormRequest
             //pj
             'company_name' => [
                 'exclude_unless:person_type,pj',
-                'required',
+                'nullable',
             ],
             'legal_responsible' => [
                 'exclude_unless:person_type,pj',
@@ -82,7 +82,7 @@ class PeopleUpdateRequest extends FormRequest
             'birthdate.date' => 'Digite corretamente a data.',
         ];
     }
-    
+
     public function attributes()
     {
         return [

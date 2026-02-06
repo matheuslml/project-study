@@ -9,7 +9,7 @@ Route::post('/web/bidding_filtered', 'App\Http\Controllers\BiddingController@web
 Route::post('/web/expense_filtered', 'App\Http\Controllers\ExpenseController@web_index_filter')->name('expense_web_index_filter');
 //BiddingAgreement
 Route::post('/web/agreement_filtered', 'App\Http\Controllers\BiddingAgreementController@web_index_filter')->name('agreement_web_index_filter');
-//People
+//Person
 //Legislation
 Route::post('/web/legislation_filtered', 'App\Http\Controllers\LegislationController@web_index_filter')->name('legislation_web_index_filter');
 //Files

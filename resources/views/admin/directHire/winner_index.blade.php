@@ -53,7 +53,7 @@
         </div>
         <!--Search Form -->
         <div class="card-datatable">
-        @if (count($people) >= 1)
+        @if (count($person) >= 1)
           <table class="dt-advanced-search-winner table">
             <thead>
               <tr>
@@ -77,7 +77,7 @@
             </tfoot>
             <tbody>
               @php $i = 0; @endphp
-              @foreach($people as $person)
+              @foreach($person as $person)
                   @if($i == 0)
                     @php $i = 1; @endphp
                     <tr class="odd">

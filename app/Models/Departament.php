@@ -40,8 +40,8 @@ class Departament extends Model implements Auditable
         $this->attributes['departament'] = mb_strtoupper($value);
     }
 
-    public function people(): BelongsToMany
+    public function person(): BelongsToMany
     {
-        return $this->belongsToMany(People::class);
+        return $this->belongsToMany(Person::class);
     }
 }

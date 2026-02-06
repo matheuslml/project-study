@@ -46,11 +46,11 @@
                   </div>
                   <div class="row">
                     <div class="mb-1 col-md-4">
-                      <label class="form-label" for="peopleable_type">Tipo de Pessoa</label>
-                      <select class="form-select input-admin" id="peopleable_type" name="peopleable_type" onchange="type_people();" disabled>
+                      <label class="form-label" for="personable_type">Tipo de Pessoa</label>
+                      <select class="form-select input-admin" id="personable_type" name="personable_type" onchange="type_person();" disabled>
                         <option value="" class="">Tipos</option>
-                        <option value="pj" {{ $winner_selected->person->peopleable_type==='App\Models\LegalPeople' ? 'selected' : '' }} >Pessoa Jurídica</option>
-                        <option value="pf" {{ $winner_selected->person->peopleable_type==='App\Models\IndividualPeople' ? 'selected' : '' }} >Pessoa Física</option>
+                        <option value="pj" {{ $winner_selected->person->personable_type==='App\Models\LegalPerson' ? 'selected' : '' }} >Pessoa Jurídica</option>
+                        <option value="pf" {{ $winner_selected->person->personable_type==='App\Models\IndividualPerson' ? 'selected' : '' }} >Pessoa Física</option>
                       </select>
                     </div>
                     <div class="mb-1 col-md-8 pf " style="display: none;">
@@ -60,11 +60,11 @@
 
                     <div class="mb-1 col-md-8 pj" style="display: none;">
                       <label class="form-label" for="company_name">Nome da Empresa</label>
-                      <input type="text" value="{{ isset($winner_selected->person->peopleable->company_name) ? $winner_selected->person->peopleable->company_name : '' }}" name="company_name" id="company_name" class="form-control" placeholder="nome" disabled/>
+                      <input type="text" value="{{ isset($winner_selected->person->personable->company_name) ? $winner_selected->person->personable->company_name : '' }}" name="company_name" id="company_name" class="form-control" placeholder="nome" disabled/>
                     </div>
                     <div class="mb-1 col-md-6 pj" style="display: none;">
                       <label class="form-label" for="legal_responsible">Nome do Representante Legal</label>
-                      <input type="text" value="{{ isset($winner_selected->person->peopleable->legal_responsible) ? $winner_selected->person->peopleable->legal_responsible : '' }}" name="legal_responsible" id="legal_responsible" class="form-control" placeholder="nome" disabled/>
+                      <input type="text" value="{{ isset($winner_selected->person->personable->legal_responsible) ? $winner_selected->person->personable->legal_responsible : '' }}" name="legal_responsible" id="legal_responsible" class="form-control" placeholder="nome" disabled/>
                     </div>
                     <div class="mb-1 col-md-6 pf" style="display: none;">
                       <label class="form-label" for="social_name">Nome Social (apelido, alcunha, designação, etc) </label>
@@ -102,7 +102,7 @@
                         name="birthdate"
                         id="birthdate"
                         class="form-control"
-                        value="{{ isset($winner_selected->person->peopleable->birthdate) ? date('Y-m-d',strtotime($winner_selected->person->peopleable->birthdate)) : '' }}"
+                        value="{{ isset($winner_selected->person->personable->birthdate) ? date('Y-m-d',strtotime($winner_selected->person->personable->birthdate)) : '' }}"
                       disabled/>
                     </div>
 
@@ -233,7 +233,7 @@
                   <label class="form-label" for="items">Itens</label>
                   <select class="select2 form-select" id="items" name="items[]" multiple>
                     @foreach($winner_selected->bidding->items as  $item)
-                      @if($item->people_id != $winner_selected->person->id)
+                      @if($item->person_id != $winner_selected->person->id)
                         <option value="{{ $item->id }}" >{{ $item->name }}</option>
                       @endif
                     @endforeach
@@ -263,7 +263,7 @@
                   <label class="form-label" for="remove_items">Itens</label>
                   <select class="select2 form-select" id="remove_items" name="remove_items[]" multiple>
                     @foreach($winner_selected->bidding->items as  $item)
-                      @if($item->people_id == $winner_selected->person->id)
+                      @if($item->person_id == $winner_selected->person->id)
                         <option value="{{ $item->id }}" >{{ $item->name }}</option>
                       @endif
                     @endforeach
@@ -313,7 +313,7 @@
             <tbody>
               @php $i = 0; @endphp
               @foreach($winner_selected->bidding->items as $item)
-                @if($item->people_id == $winner_selected->people_id)
+                @if($item->person_id == $winner_selected->person_id)
                   @if($i == 0)
                     @php $i = 1; @endphp
                     <tr class="odd">
@@ -367,7 +367,7 @@
 <script src="{{ asset(mix('js/scripts/departament/departament.js')) }}"></script>
   <script src="{{ asset(mix('js/scripts/tables/bidding-items.js')) }}"></script>
 <script src="{{ asset(mix('js/scripts/address/address.js')) }}"></script>
-<script src="{{ asset(mix('js/scripts/people/types_show.js')) }}"></script>
+<script src="{{ asset(mix('js/scripts/person/types_show.js')) }}"></script>
 <script src="{{asset(mix('js/scripts/pages/auth-register.js'))}}"></script>
 <script src="{{ asset(mix('js/scripts/forms/form-input-mask.js')) }}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-select2.js')) }}"></script>

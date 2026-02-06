@@ -45,8 +45,8 @@
                     <input type="text" value="{{ $item_selected->value }}" name="value" id="value" class="form-control value" />
                   </div>
                   <div class="col-sm-12 mb-1">
-                    <label class="form-label" for="people_id">Vencedor</label>
-                    <select class="form-select" id="people_id" name="people_id" >
+                    <label class="form-label" for="person_id">Vencedor</label>
+                    <select class="form-select" id="person_id" name="person_id" >
                       <option value="" class="">Selecione</option>
                     </select>
                   </div>

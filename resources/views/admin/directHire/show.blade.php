@@ -150,7 +150,7 @@
                 <div class="mb-1 row">
                   <div class="col-sm-12 mb-1">
                     <label class="form-label" for="possible_winner">Vencedor</label>
-                    <select class="select2 form-select" id="possible_winner" name="people_id" >
+                    <select class="select2 form-select" id="possible_winner" name="person_id" >
                       <option value="" class="">Selecione</option>
                         @foreach($possible_winners as $possible_winner)
                           <option value="{{ $possible_winner->id }}" >{{ $possible_winner->full_name }}</option>
@@ -448,8 +448,8 @@
                     <input type="text" name="value" id="value" class="form-control value" />
                   </div>
                   <div class="col-sm-12 mb-1">
-                    <label class="form-label" for="people_id">Vencedor</label>
-                    <select class="form-select" id="people_id" name="people_id" >
+                    <label class="form-label" for="person_id">Vencedor</label>
+                    <select class="form-select" id="person_id" name="person_id" >
                         @foreach($possible_winners as $possible_winner)
                           <option value="{{ $possible_winner->id }}" >{{ $possible_winner->full_name }}</option>
                         @endforeach

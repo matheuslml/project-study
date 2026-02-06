@@ -9,16 +9,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class AddressPeople extends Model implements Auditable
+class AddressPerson extends Model implements Auditable
 {
     use HasFactory;
     use SoftDeletes;
     use AuditableTrait;
 
-    protected $table = 'address_people';
+    protected $table = 'address_person';
 
     protected $fillable = [
-        'people_id',
+        'person_id',
         'address_id'
     ];
 
@@ -26,9 +26,9 @@ class AddressPeople extends Model implements Auditable
         'deleted_at'
     ];
 
-    public function people(): BelongsTo
+    public function person(): BelongsTo
     {
-        return $this->belongsTo(People::class);
+        return $this->belongsTo(Person::class);
     }
 
     public function address(): BelongsTo

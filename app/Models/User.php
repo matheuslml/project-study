@@ -20,7 +20,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 /**
  * Class User
  * @package App\Models
- * @property People people
+ * @property Person person
  * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
  */
 class User extends Authenticatable implements Auditable
@@ -36,7 +36,7 @@ class User extends Authenticatable implements Auditable
         'name',
         'email',
         'password',
-        'people_id',
+        'person_id',
         'profile_photo_path'
     ];
 
@@ -65,17 +65,17 @@ class User extends Authenticatable implements Auditable
 
     public function person(): BelongsTo
     {
-        return $this->belongsTo(People::class, 'people_id');
+        return $this->belongsTo(Person::class, 'person_id');
     }
 
     public function isTrader(): bool
     {
-        return $this->people?->touristic_trader ? true : false;
+        return $this->person?->touristic_trader ? true : false;
     }
 
     public function isEmployee(): bool
     {
-        return $this->people?->employee ? true : false;
+        return $this->person?->employee ? true : false;
     }
 
     public function sendPasswordResetNotification($token): void

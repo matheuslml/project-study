@@ -176,7 +176,7 @@
           <p class="card-text">Drag and drop items of more than one list. Add same group to group prop</p>
           <div class="row">
             <div class="col-md-6 col-sm-12">
-              <h4 class="my-1">People Group 1</h4>
+              <h4 class="my-1">Person Group 1</h4>
               <ul class="list-group list-group-flush" id="multiple-list-group-a">
                 <li class="list-group-item draggable">
                   <div class="d-flex">
@@ -256,7 +256,7 @@
               </ul>
             </div>
             <div class="col-md-6 col-sm-12">
-              <h4 class="my-1">People Group 2</h4>
+              <h4 class="my-1">Person Group 2</h4>
               <ul class="list-group list-group-flush" id="multiple-list-group-b">
                 <li class="list-group-item draggable">
                   <div class="d-flex">

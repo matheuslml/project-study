@@ -5,7 +5,7 @@ namespace App\Http\Resources\Api;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LegalPeopleResource extends JsonResource
+class IndividualPersonResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,8 +16,7 @@ class LegalPeopleResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'company_name' => $this->company_name,
-            'legal_responsible' => $this->legal_responsible,
+            'birthdate' => $this->birthdate,
         ];
     }
 }

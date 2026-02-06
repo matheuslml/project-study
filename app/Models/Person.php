@@ -18,16 +18,16 @@ use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
 // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
-class People extends Model implements Auditable
+class Person extends Model implements Auditable
 {
     use HasFactory;
     use SoftDeletes;
     use AuditableTrait;
 
 
-    protected $table = 'people';
+    protected $table = 'person';
 
-    protected $cascadeDeletes = ['documents', 'addresses', 'peopleable'];
+    protected $cascadeDeletes = ['documents', 'addresses', 'personable'];
 
     protected $fillable = [
         'full_name',
@@ -35,8 +35,8 @@ class People extends Model implements Auditable
         'genre',
         'matrial_status',
         'user_id',
-        'peopleable_id',
-        'peopleable_type'
+        'personable_id',
+        'personable_type'
     ];
 
     protected $dates = [
@@ -44,14 +44,14 @@ class People extends Model implements Auditable
         'deleted_at'
     ];
 
-    public function peopleable(): MorphTo
+    public function personable(): MorphTo
     {
-        return $this->morphTo('peopleable');
+        return $this->morphTo('personable');
     }
 
     public function emails(): HasMany
     {
-        return $this->hasMany(Email::class, 'people_id');
+        return $this->hasMany(Email::class, 'person_id');
     }
 
     public function addresses(): BelongsToMany
@@ -66,17 +66,17 @@ class People extends Model implements Auditable
 
     public function phones(): HasMany
     {
-        return $this->hasMany(Phone::class, 'people_id');
+        return $this->hasMany(Phone::class, 'person_id');
     }
 
     public function user(): HasOne
     {
-        return $this->hasOne(User::class, 'people_id')->withDefault();
+        return $this->hasOne(User::class, 'person_id')->withDefault();
     }
 
     public function documents(): HasMany
     {
-        return $this->hasMany(Document::class, 'people_id');
+        return $this->hasMany(Document::class, 'person_id');
     }
 
     public function genreData(): BelongsTo
@@ -91,7 +91,7 @@ class People extends Model implements Auditable
 
     public function getFirstNameAttribute(): string
     {
-        if ($this->peopleable_type === IndividualPeople::class) {
+        if ($this->personable_type === IndividualPerson::class) {
             return Str::before($this->full_name, ' ');
         }
         return $this->name;
@@ -99,7 +99,7 @@ class People extends Model implements Auditable
 
     public function getLastNameAttribute(): string
     {
-        if ($this->peopleable_type === IndividualPeople::class) {
+        if ($this->personable_type === IndividualPerson::class) {
             $name = explode(' ', $this->full_name);
             return array_pop($name);
         }
@@ -108,10 +108,10 @@ class People extends Model implements Auditable
 
     public function getFullNameAttribute($value): string
     {
-        if ($this->peopleable_type === IndividualPeople::class) {
+        if ($this->personable_type === IndividualPerson::class) {
             return mb_strtoupper($value);
         }
-        return mb_strtoupper($this->peopleable->company_name ?? $value);
+        return mb_strtoupper($this->personable->company_name ?? $value);
     }
 
     public function setFullNameAttribute($value): void
@@ -119,15 +119,15 @@ class People extends Model implements Auditable
         $this->attributes['full_name'] = mb_strtoupper($value);
     }
 
-    public function isAnonPeople(){
+    public function isAnonPerson(){
         return (
-            $this->peopleable_type === IndividualPeople::class &&
-            $this->peopleable->anonPeople
+            $this->personable_type === IndividualPerson::class &&
+            $this->personable->anonPerson
         );
     }
 
     public function winners(): HasMany
     {
-        return $this->hasMany(BiddingWinner::class, 'people_id');
+        return $this->hasMany(BiddingWinner::class, 'person_id');
     }
 }
