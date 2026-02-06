@@ -7,12 +7,12 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class DepartamentSeeder extends Seeder
+class PersonSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      *todo
-     *terminar seeder
+     *terminar seeder, encontrar os que faltam - parei em ANTONIO MARCOS CABICEIRA
      *fazer seeder de user
      * @return void
      */
