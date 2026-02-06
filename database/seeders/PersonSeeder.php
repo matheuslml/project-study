@@ -11,7 +11,9 @@ class DepartamentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
+     *todo
+     *terminar seeder
+     *fazer seeder de user
      * @return void
      */
     public function run()
