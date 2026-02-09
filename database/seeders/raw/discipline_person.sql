@@ -1,4 +1,4 @@
-INSERT INTO `dia_dis_alu` VALUES 
+INSERT INTO discipline_people (name,`order`,days,deleted_at,created_at,updated_at) VALUES
 (2,2,1,'2014-01-12','2013-12-25','2014-01-12',10,1,''),
 (3,14,1,'2014-01-12','2014-01-01','2014-01-12',9,3,''),
 (4,14,3,'2014-01-14','2013-12-25','2014-01-14',10,2,''),
