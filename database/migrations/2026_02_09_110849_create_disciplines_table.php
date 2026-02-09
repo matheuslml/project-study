@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('disciplines', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->integer('order');
-            $table->integer('days');
+            $table->string('name')->nullable();
+            $table->integer('order')->nullable();
+            $table->integer('days')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
